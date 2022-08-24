@@ -6,30 +6,35 @@ import { galleryItems } from "./gallery-items.js";
 const gallery = document.querySelector(".gallery");
 const galleryCard = createGalleryItem(galleryItems);
 
-gallery.insertAdjacentHTML('beforeend', galleryCard)
-
-gallery.addEventListener('click', onGalleryClick);
-
-function onGalleryClick(event) {
-    
-    if (!event.target.classList.contains('gallery__image')) {
-        return
-    }
-    console.log(event.target)
-}
+gallery.insertAdjacentHTML("beforeend", galleryCard);
 
 function createGalleryItem(galleryItems) {
-  return galleryItems.map(({preview,original,description}) => {
-    return `<div class='gallery__item'>
-         <a class='gallery__link' href=${original}>
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `<div class='gallery__item'>
+         <a class='gallery__link' href='${original}'>
          <img class='gallery__image'
-         src=${preview}
-         alt=${description}>
+         src='${preview}'
+         data-source='${original}'
+         alt='${description}'>
         </a>
         </div>`;
-  }).join('');   
-    
+    })
+    .join("");
 }
 
+gallery.addEventListener("click", onGalleryClick);
+
+function onGalleryClick(event) {
+  event.preventDefault()
+  if (!event.target.classList.contains("gallery__image")) {
+    return;
+  }
+  
+  const image = document.querySelector('.gallery__image');
+  image.src = event.target.dataset.source;
+
+  
+}
 
 
