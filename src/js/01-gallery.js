@@ -31,10 +31,25 @@ function onGalleryClick(event) {
     return;
   }
   
-  const image = document.querySelector('.gallery__image');
-  image.src = event.target.dataset.source;
+  const imageSrc = event.target.dataset.source;   
 
+  const instance = basicLightbox.create(`
+    <img src="${imageSrc}" width="800" height="600">`)  
+
+  instance.show()
+
+  window.addEventListener('keydown', onEscapeCloseModal) 
+  
+  function onEscapeCloseModal(event) {
+  if (event.code === 'Escape') {
+    instance.close()
+    
+  }
   
 }
+  
+}
+
+
 
 
