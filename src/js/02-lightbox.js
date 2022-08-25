@@ -27,6 +27,4 @@ let lightbox = new SimpleLightbox('.gallery a', {});
 lightbox.options.captionsData = "alt";
 lightbox.options.captionDelay = "250";
 
-lightbox.on(('error.simplelightbox', function (e) {
-  console.log(e)
-}))
+lightbox.on(('show.simplelightbox', function () { }));
